@@ -42,4 +42,38 @@ public class Sql2oTaskDao implements TaskDao { //implementing our interface
                     .executeAndFetchFirst(Task.class); //fetch an individual item
         }
     }
+    @Override
+    public void update(int id, String newDescription){
+        String sql = "UPDATE tasks SET description = :description WHERE id=:id";
+        try(Connection con = sql2o.open()){
+            con.createQuery(sql)
+                    .addParameter("description", newDescription)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        } catch (Sql2oException ex) {
+            System.out.println(ex);
+        }
+    }
+    @Override
+    public void deleteById(int id) {
+        String sql = "DELETE from tasks WHERE id=:id";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .addParameter("id", id)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
+
+    @Override
+    public void clearAllTasks() {
+        String sql = "DELETE from tasks";
+        try (Connection con = sql2o.open()) {
+            con.createQuery(sql)
+                    .executeUpdate();
+        } catch (Sql2oException ex){
+            System.out.println(ex);
+        }
+    }
 }

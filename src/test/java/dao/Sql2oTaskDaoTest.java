@@ -45,4 +45,33 @@ public class Sql2oTaskDaoTest {
     public void noTasksReturnsEmptyList() throws Exception {
         assertEquals(0, taskDao.getAll().size());
     }
+    @Test
+    public void updateChangesTaskContent() throws Exception {
+        String initialDescription = "mow the lawn";
+        Task task = new Task (initialDescription);
+        taskDao.add(task);
+
+        taskDao.update(task.getId(),"brush the cat");
+        Task updatedTask = taskDao.findById(task.getId()); //why do I need to refind this?
+        assertNotEquals(initialDescription, updatedTask.getDescription());
+    }
+
+    @Test
+    public void deleteByIdDeletesCorrectTask() throws Exception {
+        Task task = new Task ("mow the lawn");
+        taskDao.add(task);
+        taskDao.deleteById(task.getId());
+        assertEquals(0, taskDao.getAll().size());
+    }
+
+    @Test
+    public void clearAllClearsAll() throws Exception {
+        Task task = new Task ("mow the lawn");
+        Task otherTask = new Task("brush the cat");
+        taskDao.add(task);
+        taskDao.add(otherTask);
+        int daoSize = taskDao.getAll().size();
+        taskDao.clearAllTasks();
+        assertTrue(daoSize > 0 && daoSize > taskDao.getAll().size()); //this is a little overcomplicated, but illustrates well how we might use `assertTrue` in a different way.
+    }
 }

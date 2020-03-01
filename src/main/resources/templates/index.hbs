@@ -1,0 +1,15 @@
+{{#partial "content"}}
+
+    <h1> List o' stuff to do!</h1>
+
+    {{#if tasks}}
+        {{#each tasks }}
+         <p>Current task:</p>
+         <p>{{ description }} <a href="/tasks/{{id}}">read more...</a></p>
+        {{/each}}
+    {{else}}
+     <p>No tasks!</p>
+    {{/if}}
+{{/partial}}
+
+{{> layout.hbs}}

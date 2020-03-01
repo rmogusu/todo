@@ -1,0 +1,22 @@
+{{#partial "content"}}
+
+    <p>Description:</p>
+
+    <p>{{ task.description }}</p>
+    <h5>Created At:</h5>
+    <p> {{ task.createdAt }}</p>
+    <h5>Task status:</h5>
+    <p>
+        {{#if task.published }}
+            <span class="glyphicon glyphicon-star" aria-hidden="true"></span>  Completed
+        {{else}}
+            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span> Open
+        {{/if}}
+
+        <a href="/tasks/{{task.id}}/update">Edit this task</a><br>
+        <a href="/tasks/{{task.id}}/delete">DELETE this task (no undo)</a>
+    </p>
+
+{{/partial}}
+
+{{> layout.hbs}}

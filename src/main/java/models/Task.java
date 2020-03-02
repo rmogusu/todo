@@ -6,11 +6,12 @@ import java.util.Objects;
 
 public class Task {
 
+        private String description;
+        private boolean completed;
+        private LocalDateTime createdAt;
+        private int id;
+        private int categoryId;
 
-    private String description;
-    private boolean completed;
-    private LocalDateTime createdAt;
-    private int id;
 
     @Override
     public boolean equals(Object o) {
@@ -19,20 +20,24 @@ public class Task {
         Task task = (Task) o;
         return completed == task.completed &&
                 id == task.id &&
+                categoryId == task.categoryId &&
                 description.equals(task.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(description, completed, id);
+        return Objects.hash(description, completed, id, categoryId);
     }
 
-    public Task(String description){
+    public Task(String description, int categoryId) {
         this.description = description;
         this.completed = false;
         this.createdAt = LocalDateTime.now();
+        this.categoryId = categoryId;
+    }
 
-
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public void setCompleted(boolean completed) {
@@ -59,6 +64,8 @@ public class Task {
         return id;
     }
 
-
+    public int getCategoryId() {
+        return categoryId;
+    }
 
 }

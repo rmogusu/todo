@@ -26,7 +26,6 @@ public class Sql2oTaskDao implements TaskDao { //implementing our interface
         }
     }
 
-
     @Override
     public List<Task> getAll() {
         try(Connection con = sql2o.open()){
@@ -43,9 +42,10 @@ public class Sql2oTaskDao implements TaskDao { //implementing our interface
                     .executeAndFetchFirst(Task.class); //fetch an individual item
         }
     }
+
     @Override
     public void update(int id, String newDescription, int newCategoryId){
-        String sql = "UPDATE tasks SET (description, categoryId) = (:description, :categoryId) WHERE id=:id"; //raw sql
+        String sql = "UPDATE tasks SET (description, categoryId) = (:description, :categoryId) WHERE id=:id";   //raw sql
         try(Connection con = sql2o.open()){
             con.createQuery(sql)
                     .addParameter("description", newDescription)

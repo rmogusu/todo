@@ -6,21 +6,30 @@ import org.junit.*;
 import static org.junit.Assert.*;
 
 public class Sql2oTaskDaoTest {
-    private Sql2oTaskDao taskDao; //ignore me for now. We'll create this soon.
-    private Connection conn; //must be sql2o class conn
+    private static Sql2oTaskDao taskDao;                //these variables are now static.
+    private static Connection conn;                     //these variables are now static.
 
-    @Before
-    public void setUp() throws Exception {
-        String connectionString = "jdbc:h2:mem:testing;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
-        taskDao = new Sql2oTaskDao(sql2o); //ignore me for now
-        conn = sql2o.open(); //keep connection open through entire test so it does not get erased
+    @BeforeClass
+    public static void setUp() throws Exception {
+        String connectionString = "jdbc:postgresql://localhost:5432/todolist_test"; // connect to postgres test database
+        Sql2o sql2o = new Sql2o(connectionString, "rose", "wambua");         // changed user and pass to null
+        taskDao = new Sql2oTaskDao(sql2o);
+        conn = sql2o.open();                                                        // open connection once before this test file is run
     }
 
     @After
     public void tearDown() throws Exception {
-        conn.close();
+        System.out.println("clearing database");
+        taskDao.clearAllTasks();
+
     }
+
+    @AfterClass
+    public static void shutDown() throws Exception{
+        conn.close();
+        System.out.println("connection closed");
+    }
+
 
     @Test
     public void addingTaskSetsId() throws Exception {

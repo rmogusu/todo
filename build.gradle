@@ -20,5 +20,6 @@ dependencies {
     compile "com.sparkjava:spark-template-handlebars:2.5.5"
     compile 'org.slf4j:slf4j-simple:1.7.21'
     compile 'org.sql2o:sql2o:1.5.4'
-    compile group: 'com.h2database', name: 'h2', version: '1.4.191'
+    compile group: 'org.postgresql', name: 'postgresql', version: '42.2.2'
+    compile group: 'postgresql', name: 'postgresql', version: '9.0-801.jdbc4'
 }

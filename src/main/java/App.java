@@ -13,8 +13,8 @@ import static spark.Spark.*;
 public class App {
     public static void main(String[] args) {
         staticFileLocation("/public");
-        String connectionString = "jdbc:h2:~/todolist.db;INIT=RUNSCRIPT from 'classpath:db/create.sql'";
-        Sql2o sql2o = new Sql2o(connectionString, "", "");
+        String connectionString = "jdbc:postgresql://localhost:5432/todolist"; //connect to todolist, not todolist_test!
+        Sql2o sql2o = new Sql2o(connectionString, "rose", "wambua");
         Sql2oTaskDao taskDao = new Sql2oTaskDao(sql2o);
         Sql2oCategoryDao categoryDao = new Sql2oCategoryDao(sql2o);
 

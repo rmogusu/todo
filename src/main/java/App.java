@@ -1,10 +1,11 @@
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import dao.Sql2oCategoryDao;
+import dao.Sql2oTaskDao;
 import models.Category;
 import models.Task;
-import dao.Sql2oTaskDao;
-import java.util.List;
-import java.util.HashMap;
-import java.util.Map;
 import org.sql2o.Sql2o;
 import spark.ModelAndView;
 import spark.template.handlebars.HandlebarsTemplateEngine;
@@ -22,9 +23,11 @@ public class App {
     public static void main(String[] args) { //type “psvm + tab” to autocreate this
         port(getHerokuAssignedPort());
         staticFileLocation("/public");
-
-        String connectionString = "jdbc:postgresql://localhost:5432/todolist"; //connect to todolist, not todolist_test!
-        Sql2o sql2o = new Sql2o(connectionString, "rose", "wambua");
+//
+//        String connectionString = "jdbc:postgresql://localhost:5432/todolist"; //connect to todolist, not todolist_test!
+//       Sql2o sql2o = new Sql2o(connectionString, "rose", "wambua");
+        String connectionString = "jdbc:postgresql://ec2-34-233-186-251.compute-1.amazonaws.com:5432/dbgll9r0ej4bu0";
+        Sql2o sql2o = new Sql2o(connectionString, "aynkrphzycrnur", "7bc55376845b26f63479282896ffd8a6b7394a399e38b6edd99d7f9c52d4ae39");
         Sql2oTaskDao taskDao = new Sql2oTaskDao(sql2o);
         Sql2oCategoryDao categoryDao = new Sql2oCategoryDao(sql2o);
 

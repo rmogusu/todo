@@ -1,0 +1,7 @@
+dao/Sql2oCategoryDao.class
+dao/CategoryDao.class
+App.class
+models/Category.class
+models/Task.class
+dao/TaskDao.class
+dao/Sql2oTaskDao.class

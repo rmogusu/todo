@@ -1,0 +1,39 @@
+{{#partial "content"}}
+   {{#if editTask}}
+       <h1>Edit this Task!</h1>
+       <form action="/tasks/{{task.id}}" method="post">
+          <br>
+          <label for="description">Edit this task's description</label>
+          <input id="description" name="description" type="text" value="{{task.description}}">
+          <br>
+          <label for="categoryId">Update this task's category:</label>
+          <select id="categoryId" name="categoryId">
+             {{#each categories}}
+                <option value="{{id}}">{{name}}</option>
+             {{/each}}
+          </select>
+          <p>Don't see the right category?<a href="/categories/new">Add a new one first.</a></p>
+          <button type="submit" class="btn btn-default">Go!</button>
+       </form>
+   {{else}}
+       <h2>Add a new Task!</h2>
+       <form action="/tasks" method="post">
+         {{#if categories}}
+             <label for="description">Task Description</label>
+             <input id="description" name="description" type="text">
+             <label for="categoryId">Categorize this task as:</label>
+             <select id="categoryId" name="categoryId">
+                 {{#each categories}}
+                     <option value="{{id}}">{{name}}</option>
+                 {{/each}}
+             </select>
+             <p>Don't see the right category?<a href="/categories/new">Add a new one first.</a></p>
+         {{else}}
+             <h3> You'll need to add a category before you add a task. <a href="/categories/new">Add one here.</a> </h3>
+         {{/if}}
+         <button type="submit" class="btn btn-default">Go!</button>
+       </form>
+   {{/if}}
+{{/partial}}
+
+{{> layout.hbs}}

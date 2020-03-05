@@ -1,0 +1,4 @@
+models/CategoryTest.class
+models/TaskTest.class
+dao/Sql2oCategoryDaoTest.class
+dao/Sql2oTaskDaoTest.class
